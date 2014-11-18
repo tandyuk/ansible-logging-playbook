@@ -1,20 +1,25 @@
 ---
-- name: Install the Packetbeat central node
+- name: Install the central node
   hosts: aggregator
   sudo: yes
   roles:
     - esnode
     - aggregator
     - kibana
+      
+- name: Install extra Elasticsearch nodes
+  hosts: esnodes
+  sudo: yes
+  roles:
+    - esnode
     
-- name: Install Logstash agents and extra Elasticsearch nodes
+- name: Install Logstash on DNS Servers
   hosts: dns-servers
   sudo: yes
   roles:
     - logstash
-    - esnode
 
-- name: Install the Packetbeat and Logstash agents
+- name: Install the Packetbeat and Logstash agents on Cpanel Servers
   hosts: cpanel-servers
   sudo: yes
   roles:

@@ -40,8 +40,11 @@
      line='LS_HEAP_SIZE="{{aggregator.config.logstash_heap_size|int}}m"'
   notify: Restart Logstash
 
-- name: Install Logstash Local logging configuration
-  template: src=10-apache-local.conf dest=/etc/logstash/conf.d/10-apache-local.conf
+- name: Install Logstash Local apache configuration
+  template: src=10-apache.conf dest=/etc/logstash/conf.d/10-apache.conf
+
+- name: Install Logstash Local syslog configuration
+  template: src=10-syslog.conf dest=/etc/logstash/conf.d/10-syslog.conf
 
 - name: Install Logstash ESXI logging configuration
   template: src=20-esxi.conf dest=/etc/logstash/conf.d/20-esxi.conf

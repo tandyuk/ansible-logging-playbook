@@ -3,7 +3,7 @@
   template: src=logstash.repo dest=/etc/yum.repos.d/logstash-{{ logstash.version }}.repo
 
 - name: Install Logstash
-  yum: name={{ item }} state=present
+  yum: name={{ item }} state=present disable_gpg_check=yes
   with_items:
    - logstash
    - logstash-contrib

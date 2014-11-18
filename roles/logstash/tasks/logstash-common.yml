@@ -12,6 +12,9 @@
   sudo: yes
   sudo_user: root
   notify: Restart Logstash
+  
+- name: Install Logstash Local self logging configuration
+  template: src=10-logstash.conf dest=/etc/logstash/conf.d/10-logstash.conf
 
 - name: Install logstash output configuration file
   template: src=logstash_output.conf dest=/etc/logstash/conf.d/99logstash_output.conf

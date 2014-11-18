@@ -1,0 +1,2 @@
+- name: Install Logstash LFD logging configuration
+  template: src=10-lfd.conf dest=/etc/logstash/conf.d/10-lfd.conf

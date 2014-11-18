@@ -5,3 +5,5 @@
      line='LS_USER=root'
   notify: Restart Logstash
 
+- name: Install Logstash Local yum configuration
+  template: src=10-yum.conf dest=/etc/logstash/conf.d/10-yum.conf

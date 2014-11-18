@@ -46,6 +46,9 @@
 - name: Install Logstash Local syslog configuration
   template: src=10-syslog.conf dest=/etc/logstash/conf.d/10-syslog.conf
 
+- name: Install Logstash Local self logging configuration
+  template: src=10-logstash.conf dest=/etc/logstash/conf.d/10-logstash.conf
+
 - name: Install Logstash ESXI logging configuration
   template: src=20-esxi.conf dest=/etc/logstash/conf.d/20-esxi.conf
 

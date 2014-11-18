@@ -32,11 +32,11 @@ packetbeat:
                 ports:
                     - 3306
             pgsql:
-                enabled: true
+                enabled: false
                 ports:
                     - 5432
             redis:
-                enabled: true
+                enabled: false
                 ports:
                     - 6379
 
@@ -45,13 +45,13 @@ packetbeat:
                 enabled: true
                 cmdline_grep: "mysqld"
             pgsql:
-                enabled: true
+                enabled: false
                 cmdline_grep: "postgres"
             apache:
                 enabled: true
                 cmdline_grep: "apache"
             redis:
-                enabled: true
+                enabled: false
                 cmdline_grep: "redis"
 
 # Find aggregator's IP address from the inventory vars

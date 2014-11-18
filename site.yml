@@ -6,21 +6,16 @@
     - esnode
     - aggregator
     - kibana
-      
-- name: Install extra Elasticsearch nodes
-  hosts: esnodes
-  sudo: yes
-  roles:
-    - esnode
     
-- name: Install Logstash agents
+- name: Install Logstash agents and extra Elasticsearch nodes
   hosts: dns-servers
   sudo: yes
   roles:
     - logstash
+    - esnode
 
 - name: Install the Packetbeat and Logstash agents
-  hosts: app-servers
+  hosts: cpanel-servers
   sudo: yes
   roles:
     - packetbeat

@@ -24,11 +24,6 @@
   sudo: yes
   sudo_user: root
 
-- name: all ssl files should be owned by root
-  file: path='/etc/ssl/certs' recurse=yes owner='root' group='root'
-  sudo: yes
-  sudo_user: root
-  
 - name: Install logstash certificate file for lumberjack
   template: src=lumberjack.crt dest=/etc/ssl/certs/lumberjack.crt
   sudo: yes

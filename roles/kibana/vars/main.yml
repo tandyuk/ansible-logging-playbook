@@ -1,0 +1,11 @@
+kibana:
+    url: https://github.com/packetbeat/kibana/releases/download/v3.1.0-pb
+    archive: kibana-3.1.0-packetbeat.tar.gz
+
+    config:
+        server_name: "localhost"
+        elasticsearch_url: '"http://observium.tandyuk.com:9200"'
+
+# Find aggregator's IP address from the inventory vars
+aggregator_bind_iface: "{{ hostvars[groups['aggregator'][0]].get('main_iface', 'eth0') }}"
+aggregator_bind_ip: "{{ hostvars[groups['aggregator'][0]]['ansible_' + aggregator_bind_iface ].ipv4.address }}"

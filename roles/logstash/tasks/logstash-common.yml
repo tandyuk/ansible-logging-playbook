@@ -1,0 +1,36 @@
+- name: Logstash set heap size
+  action: >
+     lineinfile dest=/etc/init.d/logstash state=present
+     regexp="^LS_HEAP_SIZE="
+     line='LS_HEAP_SIZE="{{logstash.config.heap_size|int}}m"'
+  sudo: yes
+  sudo_user: root
+  notify: Restart Logstash
+
+- name: Install logstash syslog input
+  template: src=10-syslog.conf dest=/etc/logstash/conf.d/10-syslog.conf
+  sudo: yes
+  sudo_user: root
+  notify: Restart Logstash
+
+- name: Install logstash output configuration file
+  template: src=logstash_output.conf dest=/etc/logstash/conf.d/99logstash_output.conf
+  sudo: yes
+  sudo_user: root
+  notify: Restart Logstash
+
+- name: ensure ssl cert path exists
+  file: path='/etc/ssl/certs/' state=directory recurse=yes owner='root' group='root'
+  sudo: yes
+  sudo_user: root
+
+- name: all ssl files should be owned by root
+  file: path='/etc/ssl/certs' recurse=yes owner='root' group='root'
+  sudo: yes
+  sudo_user: root
+  
+- name: Install logstash certificate file for lumberjack
+  template: src=lumberjack.crt dest=/etc/ssl/certs/lumberjack.crt
+  sudo: yes
+  sudo_user: root
+  notify: Restart Logstash

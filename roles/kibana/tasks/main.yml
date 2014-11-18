@@ -1,0 +1,29 @@
+- name: Download Kibana
+  get_url: url={{ kibana.url }}/{{ kibana.archive }} dest=/tmp/{{ kibana.archive }}
+  register: kibana_archive
+
+- name: Make install directory
+  file: path=/var/www state=directory owner=www-data group=www-data mode=755
+
+- name: Delete old installation
+  file: path=/var/www/kibana state=absent
+  when: kibana_archive.changed
+
+- name: Install kibana
+  script: install-kibana.sh {{ kibana.archive }} /var/www/kibana www-data
+  when: kibana_archive.changed
+
+- name: Apache2 restart
+  service: name=apache2 state=started
+
+- name: Set ES URL in Kibana configuration
+  lineinfile: >
+    dest=/var/www/kibana/config.js
+    regexp="^[ \t]*elasticsearch: "
+    line='    elasticsearch: {{ kibana.config.elasticsearch_url }},'
+
+- name: Set default dashboard
+  lineinfile: >
+    dest=/var/www/kibana/config.js
+    regexp="^[ \t]*default_route[ \t]*: "
+    line='    default_route: "/dashboard/elasticsearch/Packetbeat%20Statistics",'

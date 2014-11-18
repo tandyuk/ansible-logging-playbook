@@ -1,0 +1,12 @@
+- name: Install logstash apache input
+  template: src=10-apache.conf dest=/etc/logstash/conf.d/10-apache.conf
+  sudo: yes
+  sudo_user: root
+  notify: Restart Logstash
+
+- name: Install logstash exim input
+  template: src=10-exim.conf dest=/etc/logstash/conf.d/10-exim.conf
+  sudo: yes
+  sudo_user: root
+  notify: Restart Logstash
+

@@ -1,0 +1,52 @@
+---
+- name: Install Java7
+  apt: pkg=java7-runtime-headless update_cache=yes state=latest
+  tags: deps
+
+- name: Add Elasticsearch repository
+  apt_repository: repo="deb http://packages.elasticsearch.org/elasticsearch/{{ elasticsearch.version }}/debian stable main" state=present
+
+- name: Add Elasticsearch repository key
+  apt_key: url="http://packages.elasticsearch.org/GPG-KEY-elasticsearch" state=present
+
+- name: Install Elasticsearch
+  apt: pkg=elasticsearch update_cache=yes state=latest
+
+- name: ES configuration
+  template: src=elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml
+  notify: Restart ES
+
+- name: ES set heap size
+  action: >
+     lineinfile dest=/etc/init.d/elasticsearch state=present
+     regexp="^ES_HEAP_SIZE" insertafter="\#ES_HEAP_SIZE"
+     line="ES_HEAP_SIZE={{elasticsearch.config.heap_size|int}}m"
+  notify: Restart ES
+
+- name: Start ES
+  service: name=elasticsearch state=started
+
+- name: Wait for ES to start
+  wait_for: host={{ elasticsearch_bind_ip }} port=9200
+
+- name: Copy ES template file for Packetbeat
+  template: src=packetbeat.template.json dest=/tmp/packetbeat.template.json
+  register: es_template
+
+- name: Load template
+  shell: >
+      chdir=/tmp
+      curl -XPUT 'http://{{elasticsearch_bind_ip}}:9200/_template/packetbeat' -d @packetbeat.template.json
+  when: es_template.changed
+
+- name: Download Packetbeat Dashboards
+  get_url: url={{ dashboards.url }}/{{ dashboards.archive }} dest=/tmp/{{ dashboards.archive }}
+  register: dashboards_archive
+
+- name: Uncompress Dashboards
+  command: chdir=/tmp/ tar xvf {{ dashboards.archive }}
+  when: dashboards_archive.changed
+
+- name: Load dashboards
+  command: chdir=/tmp/{{ dashboards.dir_name }} ./load.sh {{ elasticsearch_bind_ip }}
+  when: dashboards_archive.changed

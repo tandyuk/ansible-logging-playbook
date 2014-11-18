@@ -1,0 +1,13 @@
+[aggregator]
+observium.tandyuk.com ansible_connection=local
+
+[dns-servers]
+ns2.tandyuk.com ansible_ssh_port=222 ansible_ssh_user=root
+ns1.tandyuk.com ansible_ssh_port=222 ansible_ssh_user=root
+
+[cpanel-servers]
+uk1.tandyuk.com ansible_ssh_port=222 ansible_ssh_user=root
+
+[voip-servers]
+voip.tandyuk.com ansible_ssh_port=222 ansible_ssh_user=root
+

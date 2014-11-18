@@ -1,0 +1,25 @@
+- include: debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: logstash-redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: logstash-debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: logstash-cpanel.yml
+  when: "'cpanel-servers' in group_names"
+
+- include: logstash-dns.yml
+  when: "'dns-servers' in group_names"
+
+
+- include: logstash-common.yml
+
+- name: Start Logstash
+  service: name=logstash state=started
+  sudo: yes
+  sudo_user: root

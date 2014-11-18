@@ -1,0 +1,7 @@
+- name: Set logstash to run as root
+  action: >
+     lineinfile dest=/etc/sysconfig/logstash state=present
+     regexp="^LS_USER="
+     line='LS_USER=root'
+  notify: Restart Logstash
+

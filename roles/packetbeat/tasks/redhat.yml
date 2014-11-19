@@ -1,7 +1,12 @@
-- name: Install Packetbeat dependencies
+- name: Install Epel Repo dependencies
   yum: name={{ item }} state=present
   with_items:
-        - http://mirror-fpt-telecom.fpt.net/fedora/epel/6/i386/epel-release-6-8.noarch.rpm
+        - epel-release
+  tags: deps
+
+- name: Install Packetbeat dependencies
+  yum: name={{ item }} state=present enablerepo=epel
+  with_items:
         - libpcap
         - daemonize
   tags: deps

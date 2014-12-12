@@ -17,4 +17,4 @@ aggregator:
 aggregator_bind_iface: "{{ hostvars[inventory_hostname].get('main_iface', 'eth0') }}"
 aggregator_bind_ip: "{{ hostvars[inventory_hostname]['ansible_' + aggregator_bind_iface ].ipv4.address }}"
 
-curator_bin: "python /usr/local/lib/python2.7/dist-packages/curator/curator.py"
+curator_bin: "/usr/local/bin/curator"

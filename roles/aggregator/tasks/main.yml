@@ -65,17 +65,9 @@
   template: src=99-output-elasticsearch.conf dest=/etc/logstash/conf.d/99-output-elasticsearch.conf
   notify: Restart Logstash
 
-- name: Schedule curator for Packetbeat
+- name: Schedule curator for ES
   cron: >
-        name='Curate Packetbeat'
-        hour=2 minute=15
-        job="{{ curator_bin }} -D -p packetbeat- -d {{ aggregator.config.days_of_history }}"
-        user=elasticsearch cron_file=packetbeat
-
-
-- name: Schedule curator for Logstash
-  cron: >
-        name='Curate Logstash'
+        name='Curate Logs'
         hour=3 minute=15
-        job="{{ curator_bin }} -D -p logstash- -d {{ aggregator.config.days_of_history }}"
-        user=elasticsearch cron_file=packetbeat
+        job="{{ curator_bin }} --host {{ aggregator_bind_ip }} delete --older-than {{ aggregator.config.days_of_history }}"
+        user=root cron_file=ES_curator

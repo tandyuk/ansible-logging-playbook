@@ -1,0 +1,8 @@
+---
+- name: Install the central node
+  hosts: elite
+  sudo: yes
+  roles:
+    - esnode
+    - aggregator
+    - kibana

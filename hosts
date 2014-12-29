@@ -11,3 +11,5 @@ uk1.tandyuk.com ansible_ssh_port=222 ansible_ssh_user=root
 [voip-servers]
 voip.tandyuk.com ansible_ssh_port=222 ansible_ssh_user=root
 
+[elite]
+es.twin-suns.co.uk ansible_connection=local

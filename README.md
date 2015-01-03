@@ -12,9 +12,11 @@ Your 'dns-servers' are cPanel DNSonly machines running centos 5 or 6.
 
 Your 'voip-servers' are Scopserv pbxes runnign centos 5.x
 
-Your 'cpanel-servers' are cPanel machines running centos 6.x
+Your 'cpanel-servers' are production cPanel machines running centos or cloudlinux 6.x
 
-You will execute the playbook on the 'aggregator' host.
+Your 'cpanel-dev-servers' are development cPanel machines running centos or cloudlinux 6.x with packetbeat
+
+You will execute the playbook on the 'aggregator' (debian) host.
 
 You have created ssh keys for your user on the aggregator host, and added these to /root/.ssh/authorized_keys on each of the other hosts.
 

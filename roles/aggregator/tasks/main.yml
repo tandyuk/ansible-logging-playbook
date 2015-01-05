@@ -8,6 +8,27 @@
    - python-pycurl
    - python-apt
    - python-setuptools
+   - libapache2-mod-php5
+   - php5-cli
+   - php5-mysql
+   - php5-gd
+   - php5-snmp
+   - php-pear
+   - snmp
+   - graphviz
+   - php5-mcrypt
+   - php5-json
+   - subversion
+   - mysql-server
+   - mysql-client
+   - rrdtool
+   - fping
+   - imagemagick
+   - whois
+   - mtr-tiny
+   - nmap
+   - ipmitool
+   - python-mysqldb
   tags: deps
 
 - easy_install: name=pip

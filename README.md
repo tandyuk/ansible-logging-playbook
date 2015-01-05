@@ -27,15 +27,24 @@ Pre-requisites
 On your Aggregator host:
 
 apt-get install python-pip python-dev git sudo
+
 pip install PyYAML jinja2 paramiko
+
 git clone https://github.com/ansible/ansible.git
+
 cd ansible
+
 make install
 
+
 Finally,
+
 visudo
+
 and add a line similar to
+
 youruser   ALL=(ALL:ALL) ALL
+
 replacing youruser with the username of the unpriviledged account you created during debian setup.
 
 

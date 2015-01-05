@@ -22,7 +22,21 @@ You have created ssh keys for your user on the aggregator host, and added these 
 
 You have created an ssl crt/key pair on the aggregator, and saved these as /etc/ssl/certs/lumberjack.crt and /etc/ssl/private/lumberjack.key. You place a copy of your own lumberjack.crt in roles/logstash/templates/
 
+Pre-requisites
+==============
+On your Aggregator host:
 
+apt-get install python-pip python-dev git sudo
+pip install PyYAML jinja2 paramiko
+git clone https://github.com/ansible/ansible.git
+cd ansible
+make install
+
+Finally,
+visudo
+and add a line similar to
+youruser   ALL=(ALL:ALL) ALL
+replacing youruser with the username of the unpriviledged account you created during debian setup.
 
 
 About

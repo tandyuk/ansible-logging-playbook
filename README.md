@@ -6,9 +6,9 @@ Ansible playbook containing a logging/monitoring system for pfsense, vmware esxi
 
 Assumptions
 ===========
-Your 'aggregator' node is a dedicated machine (or vm) running debian.
+Your 'aggregator' node is a dedicated machine (or vm) running debian **x86**.
 
-Your 'dns-servers' are cPanel DNSonly machines running centos 5 or 6.
+Your 'dns-servers' are cPanel DNSonly machines running centos 5.x or 6.x, or cloudlinux 6.x
 
 Your 'voip-servers' are Scopserv pbxes runnign centos 5.x
 

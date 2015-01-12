@@ -29,6 +29,8 @@
    - nmap
    - ipmitool
    - python-mysqldb
+   - curl
+   - libcurl3
   tags: deps
 
 - easy_install: name=pip

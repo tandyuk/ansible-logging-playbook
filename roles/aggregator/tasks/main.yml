@@ -67,7 +67,7 @@
   local_action: shell ls {{ inventory_dir }}/roles/aggregator/templates/logstash
   register: template_files
   
-- template: src={{ item }} dest=/etc/logstash/conf.d/{{item}}
+- template: src=logstash/{{ item }} dest=/etc/logstash/conf.d/{{item}}
   with_items: template_files.stdout_lines
   notify: Restart Logstash
 

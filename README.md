@@ -47,6 +47,21 @@ youruser   ALL=(ALL:ALL) ALL
 
 replacing youruser with the username of the unpriviledged account you created during debian setup.
 
+Running the playbook
+====================
+git clone https://github.com/tandyuk/ansible-logging-playbook.git
+
+cd ansible-logging-playbook
+
+Edit hosts to suit your setup
+
+Copy your lumberjack.crt to roles/logstash/templates/
+
+ansible-playbook -i hosts site.yml
+
+Go make coffee :)
+
+
 
 About
 =====

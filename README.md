@@ -52,6 +52,22 @@ About
 =====
 As I develop this logging system, it will start very much tuned to my exact setup.
 
+Recently I have moved the logstash configs to a more defined format for the aggregator host:
+
+1?-xxxxx.conf:  Define local file (and other) inputs, for logging the local system.
+
+2?-xxxxx.conf: Define inputs for logging from remote systems.
+
+Both these sets of inputs are expected to set a type on the input, which will then match the relevant
+
+3?-xxxxx.conf: Define filters for certain formats.
+
+Big gap for future changes
+
+9?-xxxxx.conf: Define outputs.
+
+
+
 Over time I hope to move the majority of 'my setup' to hosts and site.yml so that this is easily customisable and deployable for others.
 
 

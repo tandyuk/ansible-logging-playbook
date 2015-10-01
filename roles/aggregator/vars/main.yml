@@ -1,5 +1,5 @@
 aggregator:
-    logstash_version: "1.4"
+    logstash_version: "1.5"
 
     config:
 

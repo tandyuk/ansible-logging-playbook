@@ -3,7 +3,7 @@ aggregator:
 
     config:
 
-        days_of_history: 3
+        days_of_history: 14
 
         redis_port: 6380
 
